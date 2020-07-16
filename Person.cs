@@ -1,5 +1,3 @@
-﻿using System;
-
 namespace AssessmentTask
 {
 	public class Person
@@ -12,11 +10,11 @@ namespace AssessmentTask
 
 		public Person(string firstName, string lastName, string country, string city, int score)
         {
-			this.FirstName = firstName;
-			this.LastName = lastName;
-			this.Country = country;
-			this.City = city;
-			this.Score = score;
+			FirstName = firstName;
+			LastName = lastName;
+			Country = country;
+			City = city;
+			Score = score;
         }
 
 	}
