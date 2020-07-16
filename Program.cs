@@ -33,7 +33,7 @@ namespace AssessmentTask
             var foo1 = new EmailAddressAttribute();
             while (!foo1.IsValid(receiverEmail))
             {
-                Console.WriteLine("Incorrect email. Try again.\nSender Email Address: ");
+                Console.WriteLine("Incorrect email. Try again.\nReceiver Email Address: ");
                 receiverEmail = Console.ReadLine();
             }
 
