@@ -16,6 +16,5 @@ namespace AssessmentTask
 			City = city;
 			Score = score;
         }
-
 	}
 }
