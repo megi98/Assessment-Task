@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CsvHelper;
 using System.Net.Mail;
 using System.Net;
+using System.ComponentModel.DataAnnotations;
 
 namespace AssessmentTask
 {
@@ -17,12 +18,24 @@ namespace AssessmentTask
 
             Console.WriteLine("Sender Email Address: ");
             string senderEmail = Console.ReadLine();
+            var foo = new EmailAddressAttribute();
+            while (!foo.IsValid(senderEmail))
+            {
+                Console.WriteLine("Incorrect email. Try again.\nSender Email Address: ");
+                senderEmail = Console.ReadLine();
+            }
 
             Console.WriteLine("Sender Password: ");
             string senderPassword = Console.ReadLine();
 
             Console.WriteLine("Receiver Email Address: ");
             string receiverEmail = Console.ReadLine();
+            var foo1 = new EmailAddressAttribute();
+            while (!foo1.IsValid(receiverEmail))
+            {
+                Console.WriteLine("Incorrect email. Try again.\nSender Email Address: ");
+                receiverEmail = Console.ReadLine();
+            }
 
             List<Person> people = new List<Person>();
             try
@@ -33,7 +46,7 @@ namespace AssessmentTask
                     string line = reader.ReadLine();
                     if (!String.IsNullOrWhiteSpace(line))
                     {
-                        string[] values = line.Split(',');
+                        string[] values = line.Split(';');
                         if (values.Length >= 5 && values[0] != "First Name")
                         {
                             Person person = new Person(values[0], values[1], values[2], values[3], int.Parse(values[4]));
@@ -83,7 +96,7 @@ namespace AssessmentTask
                 sample.FindRecordCount(scores);
                 samples.Add(sample);
             }
-            List<Sample> sortedSamples = samples.OrderByDescending(o=> o.Average).ToList();
+            List<Sample> sortedSamples = samples.OrderByDescending(o => o.Average).ToList();
 
             string directoryName = Path.GetDirectoryName(path);
             string newPath = directoryName + @"\ReportByCountry.csv";
@@ -107,7 +120,7 @@ namespace AssessmentTask
             {
                 Console.WriteLine("Error pathname or incorrect writing data in the new file.\nError: " + exc);
             }
-            
+
             try
             {
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
@@ -126,7 +139,7 @@ namespace AssessmentTask
             catch (Exception exc)
             {
                 Console.WriteLine("Unable to send email.\nError: " + exc);
-            }         
+            }
         }
     }
 }
