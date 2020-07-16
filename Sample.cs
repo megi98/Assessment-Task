@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,19 +28,19 @@ namespace AssessmentTask
 
 		public Sample(string country, double average, double median, int max, string maxPerson, int min, string minPerson, int recordCount)
 		{
-			this.Country = country;
-			this.Average = average;
-			this.Median = median;
-			this.Max = max;
-			this.MaxPerson = maxPerson;
-			this.Min = min;
-			this.MinPerson = minPerson;
-			this.RecordCount = recordCount;
+			Country = country;
+			Average = average;
+			Median = median;
+			Max = max;
+			MaxPerson = maxPerson;
+			Min = min;
+			MinPerson = minPerson;
+			RecordCount = recordCount;
 		}
 
 		public void FindAverage(List<int> scores)
         {			
-			this.Average = (double)scores.Average();
+			Average = (double)scores.Average();
         }
 
 		public void FindMedian(List<int> scores)
@@ -58,12 +57,12 @@ namespace AssessmentTask
             {
 				result = (double)(scores[mid] + scores[mid - 1]) / 2;
             }
-			this.Median = (double)result;
+			Median = result;
         }
 
 		public void FindMax(List<int> scores)
         {			
-			this.Max = scores.Max();
+			Max = scores.Max();
 		}
 
 		public void FindMaxPerson(List<Person> group)
@@ -71,17 +70,24 @@ namespace AssessmentTask
 			string result = "";
 			foreach (Person participant in group)
             {
-				if (participant.Score == this.Max)
+				if (participant.Score == Max)
 				{
-					result = participant.FirstName + " " + participant.LastName;
+					if (result != "")
+					{
+						result = result + ", " + participant.FirstName + " " + participant.LastName;
+					}
+					else
+                    {
+						result = participant.FirstName + " " + participant.LastName;
+					}
 				}
             }
-			this.MaxPerson = result;
+			MaxPerson = result;
         }
 
 		public void FindMin(List<int> scores)
         {
-			this.Min = scores.Min();
+			Min = scores.Min();
         }
 
 		public void FindMinPerson(List<Person> group)
@@ -89,17 +95,24 @@ namespace AssessmentTask
 			string result = "";
 			foreach (Person participant in group)
 			{
-				if (participant.Score == this.Min)
+				if (participant.Score == Min)
 				{
-					result = participant.FirstName + " " + participant.LastName;
+					if (result != "")
+					{
+						result = result + ", " + participant.FirstName + " " + participant.LastName;
+					}
+					else
+					{
+						result = participant.FirstName + " " + participant.LastName;
+					}
 				}
 			}
-			this.MinPerson = result;
+			MinPerson = result;
 		}
 
 		public void FindRecordCount(List<int> scores)
         {
-			this.RecordCount = scores.Count;
+			RecordCount = scores.Count;
         }
 	}
 }
